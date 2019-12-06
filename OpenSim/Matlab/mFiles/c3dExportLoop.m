@@ -25,13 +25,16 @@
 % It is typical to see COP and Tz spikes at the transitions of impact (heel strike and toe-off during gait) 
 % since very small force values are used in the denominator of the COP/Tz and this results in numerical errors. 
 % So, when processing forceplate data, it is typical to zero all force and moment values below some 
-% threshold— motion analysis companies do this for you in their software. If you are using the OpenSim C3D reader,
+% threshold? motion analysis companies do this for you in their software. If you are using the OpenSim C3D reader,
 % BTK is used read the C3D file and there is no thresholding being performed.
 % So I do smoothing and then make cop in AP/ML to go back within the area and to the
 % past cop x,y and moments >15Nm and GRFv <40N, zero.
 
 %% Example of using the Matlab-OpenSim class 
 function c3dExportLoop(path, filename, filter)
+disp("hello")
+disp(filter)
+disp(filter(3));
 %% Load OpenSim libs
 import org.opensim.modeling.*
 % if filter = -1 then no filtering occurs [filter (y/n) cutOff=15hz order=4]
@@ -42,7 +45,7 @@ import org.opensim.modeling.*
 % subjectDir = dirIn;
 % [filename, path] = uigetfile('*.c3d');
 c3dpath = fullfile(path,'C3DFiles',filename);
-
+disp(c3dpath)
 %% Construct an opensimC3D object with input c3d path
 % Constructor takes full path to c3d file and an integer for forceplate
 % representation (1 = COP). 
@@ -168,6 +171,7 @@ if filter(1) ~= -1
     %%%%%%%%%%%%%%%%end above: delete nans and make them zero %%%%%%%%%%%%%%
     
     for i = 1:length(fieldsmarker)
+        disp(rMarkers);
         if i~=length(fieldsmarker) % time is the last so not smoothing it
         markerStrNew.(fieldsmarker{i}) = smooth(markerStruct.(fieldsmarker{i}), filter(2), rMarkers, filter(3));
         %     markerStruct.(fieldsforce{i}) = setfield(markerStruct,fieldsforce{i},markerbuff);
@@ -216,7 +220,7 @@ if filter(1) ~= -1
     end
 %    
      
-     %% from Gordon DFN, et al 2018. 2018;5:1–16. next threshold
+     %% from Gordon DFN, et al 2018. 2018;5:1?16. next threshold
 % For the next step a threshold filter was applied to the ground reaction forces and moments 
 % that set all values equal to zero when the vertical force was less than 40 N. This
 %      forceStrNew = 

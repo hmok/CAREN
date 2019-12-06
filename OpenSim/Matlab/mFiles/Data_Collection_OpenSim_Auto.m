@@ -13,10 +13,10 @@
 
 % TODOs: compare Table and Struc and see how to save the data to visualize
 % better later
-% Make sure you collect all dta from folders so loop in folders for all subject
+% Make sure you collect all data from folders so loop in folders for all subject
 % can we get all the data (GRF, MOS, Muscle, etc) in one go as the folders
 % are in the same place. so think about it 
-% ultimate goal: get all results in one MAT file which is a Structur Array.
+% ultimate goal: get all results in one MAT file which is a Structure Array.
 % Do we need plotting at this stage or leave it for next step
 
 %% Let's collect any e.g. MOT, STO, TRC files
@@ -93,7 +93,7 @@ fileNames = cell(n,1);
 for i=1:n
     fileNames{i} = convertCharsToStrings(ExpFolderName(i,1).name);
 end
-
+disp(fileFormat);
 if strcmp(fileFormat, '*.trc')
 % lets collect all TRC files from this folder
 parfor i=1:n
@@ -105,6 +105,7 @@ parfor i=1:n
     [filepath,name,ext] = fileparts(dirName2.name)
     TRCs(i).name = name;
     TRCs(i).data = trc;
+    % save(saveName,'TRCs')
 end
 save(saveName,'TRCs')
 clear dirIn trcpath ExpFolderName trc trctimeSeriesTable fileNames
@@ -151,29 +152,31 @@ toc
 
 %it can be easily no switch and just use strcat in the second part of save
 %function
-switch strcat(upper(saveName(1:2)))
-    case 'IK'
-        disp('Method is IKs')
-        IKs = GRFs;
-        save(saveName,'IKs')
-    case 'GR'
-        disp('Method is GRF')
-        save(saveName,'GRFs')
-    case 'SO'
-        disp('Method is SOs')
-        SOs=GRFs;
-        save(saveName,'SOs')
-        case 'RR'
-        disp('Method is RRAs')
-        RRAs=GRFs;
-        save(saveName,'RRAs')
-        
-        case 'ID'
-        disp('Method is IDs')
-        IDs=GRFs;
-        save(saveName,'IDs')
-    otherwise
-        disp('Unknown method.')
+if n > 0
+    switch strcat(upper(saveName(1:2)))
+        case 'IK'
+            disp('Method is IKs')
+            IKs = GRFs;
+            save(saveName,'IKs')
+        case 'GR'
+            disp('Method is GRF')
+            save(saveName,'GRFs')
+        case 'SO'
+            disp('Method is SOs')
+            SOs=GRFs;
+            save(saveName,'SOs')
+            case 'RR'
+            disp('Method is RRAs')
+            RRAs=GRFs;
+            save(saveName,'RRAs')
+
+            case 'ID'
+            disp('Method is IDs')
+            IDs=GRFs;
+            save(saveName,'IDs')
+        otherwise
+            disp('Unknown method.')
+    end
 end
 
 % v={strcat(upper(name(1:2)))}%{'GRFs','IKs',''};

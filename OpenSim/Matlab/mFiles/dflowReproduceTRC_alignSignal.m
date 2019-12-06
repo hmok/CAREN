@@ -60,9 +60,13 @@ cd(trcPath)
 load TRCs
 close all
 cd ../ 
-dflowDir = strcat(cd,'\DFLOW'); 
+%dflowDir = strcat(cd,'\DFLOW'); 
+dflowDir = cd;
+disp(dflowDir);
 
-[~,~, PerturbFrame] = dflow(dflowDir, -1); % this is from actual data
+cd('C:\Users\Corrine\Desktop\Intern2019Summer\OpenSim\Matlab\mFiles')
+[~,~, PerturbFrame] = dflow(dflowDir, -1, -1); % this is from actual data
+%[~,~, PerturbFrame] = dflow(dflowDir, -1); % this is from actual data
 % cd('C:\Users\mhossein\OneDrive - The University of Melbourne\Summer Internships 2018\Data\CB2\VICON\CB2\trcResults')
 % load gaitEvents.mat
 % close all
@@ -117,6 +121,7 @@ for i=1:length(TRCs)
     end
     
     %%
+    disp(side)
     time =  TRCs(i).data.time;fnames=fields(TRCs(i).data);
     HStiming =[];
     %         load gaitEvents.mat; % to find intersection in between left right
@@ -174,6 +179,7 @@ for i=1:length(TRCs)
     X1=[1:length(FvelL)]';X2=X1;pertubL=[];pertubR=[];frame2=[];
     
     %     hold on; plot(sqrt(FvelL.^2)); plot(sqrt(FvelR.^2));legend('Left','Right');hold off
+    cd('C:\Users\Corrine\Desktop\Intern2019Summer\OpenSim\Matlab\mFiles');
     intSec = intersections(X1,FvelL,X2,FvelR);
     
     % a1=FvelL;
@@ -279,13 +285,17 @@ for i=1:length(TRCs)
     if ~strcmp(side, 'No')
     
           % bring the pertub fro actual data here as well and diplay it
+          disp(length(PerturbFrame));
           for jj = 1:length(PerturbFrame)
               
               index = find(strcmp({framePerturb(:,i).name}, {PerturbFrame(jj).name})==1); % PerturbFrame is the actual one frmom dflow.m
               if ~isempty(index)
-              disp(strcat('This is the actual frame at Pertubation: ', int2str(PerturbFrame(jj).iniPerturb)));
-              ActualFrame2 = PerturbFrame(jj).iniPerturb;
-              break
+                  disp(strcat('This is the actual frame at Pertubation: ', int2str(PerturbFrame(jj).iniPerturb)));
+                  ActualFrame2 = PerturbFrame(jj).iniPerturb;
+                  break
+              else
+                  ActualFrame2 = [];
+              
               end
               
           end
@@ -300,7 +310,8 @@ if (x == 1) && isempty(ActualFrame2)
     disp('find it manually and then')
     frame2 = input('Type the actual frame location i.e. 213:  ');
     framePerturb(:,i).data = frame2; %actual from
-    if x == 1 && ~isemtpy(ActualFrame2)
+    disp(~isempty(ActualFrame2))
+    if x == 1 && ~isempty(ActualFrame2)
         framePerturb(:,i).data = ActualFrame2; %actual from
         frame2 = ActualFrame2;
     end
@@ -318,7 +329,11 @@ end
     %             figure(i);
     %             findpeaks(abs(Fvel));
     %         end
-    dflowPredic = vel*ones(length(TRCs(7).data.time),1);
+    
+    
+    %why 7 ???????
+   
+    dflowPredic = vel*ones(length(TRCs(1).data.time),1);
     if ~isempty(frame2)
         %         tPeak = time(Lloc); % time of the peak vecolity
         delta = offset/slop;  % Acc = tan(theta) = 0.01 = offset/delta(t)

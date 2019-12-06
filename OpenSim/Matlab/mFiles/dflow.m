@@ -74,7 +74,7 @@ n=length(ExpFolderName);
 %
 for i=3:n
     fileNames{i-2} = convertCharsToStrings(ExpFolderName(i,1).name);
-     [~,names,~]=fileparts(fileNames{i-2});
+    [~,names,~]=fileparts(fileNames{i-2});
     fileNames{i-2} = names;
 end
 
@@ -151,11 +151,12 @@ v = [.556 1.111 6/3.6];
 
 %% importdata('CB2_W1+P01.txt')
 
-for w = 1:length(fileNames)%n % 3 cause the first two are ., ..
+for w = 1:4%n % 3 cause the first two are ., ..
     % b = importdata('CB2_W3+P01.txt');
     %  b = importdata('Subject_BG5_W3010002_corrected.txt');
     % filename = 'CB_W1.txt';
     filename = fileNames{w};%'CB_W1.txt';
+    disp(filename)
     b = importdata(strcat(filename,'.txt')); name = filename; %[filepath,name,ext] = fileparts(filename);
     a = b.data;t = a(:,1);
     % fnd the first nonzero in time

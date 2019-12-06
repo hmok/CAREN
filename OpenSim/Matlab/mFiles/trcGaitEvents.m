@@ -87,7 +87,7 @@ for i =1:length(TRCs)
 
  gaitEvents(i).data.stepLengthL = abs((TRCs(i).data.LHEE(int64(HSLocL*100),3)-TRCs(i).data.RHEE(int64(HSLocL*100),3))/1000);
  gaitEvents(i).data.stepLengthR = abs((TRCs(i).data.RHEE(int64(HSLocR*100),3)-TRCs(i).data.LHEE(int64(HSLocR*100),3))/1000);
-gaitEvents(i).data.stepWidthL = abs((TRCs(i).data.LHEE(int64(HSLocL*100),2)-TRCs(i).data.RHEE(int64(HSLocL*100),2))/1000);
+ gaitEvents(i).data.stepWidthL = abs((TRCs(i).data.LHEE(int64(HSLocL*100),2)-TRCs(i).data.RHEE(int64(HSLocL*100),2))/1000);
  gaitEvents(i).data.stepWidthR = abs((TRCs(i).data.RHEE(int64(HSLocR*100),2)-TRCs(i).data.LHEE(int64(HSLocR*100),2))/1000);
 %
 %     

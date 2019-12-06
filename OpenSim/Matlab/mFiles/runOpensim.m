@@ -36,7 +36,7 @@ function runOpensim(dirIn,filter,cutoff,order)
 % which_analyses = [1 2 3]; % 1: only trc, 2: only mot GRF, 3: both
 which_analyses = 1; %to get TRCs for e.g. gait event this is easier to do it faster.
 %
-addpath('C:\Users\mhossein\Documents\OpenSim\4.0\Code\Matlab'); % add this path for M files
+addpath('C:\Users\Corrine\Desktop\Intern2019Summer\OpenSim\Matlab\mFiles'); % add this path for M files
 % get the folder
 % dirIn = 'C:\Users\mhossein\OneDrive - The University of Melbourne\Summer Internships 2018\Data\DF1\';
 % dirIn = 'C:\Users\mhossein\OneDrive - The University of Melbourne\Summer Internships 2018\Data\CB2\VICON\CB2';
@@ -80,7 +80,7 @@ tic
 k=1;%for errCollec
 % dd = [6;7;8;9;10;12;13;14;15;16;17;18;19;33;46;52;53];
 
-for i=1:5%n%%[dd(1):dd(end)]%1:n%22:n
+for i=1:n%n%%[dd(1):dd(end)]%1:n%22:n
     % dirName2 = dir(fullfile(cd,ExpFolderName(i,1).name,'*SE*.csv'));%dir('Test*');
     dirName2 = dir(fullfile(c3dpath,ExpFolderName(i,1).name));%dir('Test*');
     dirName2.name;
@@ -88,22 +88,23 @@ for i=1:5%n%%[dd(1):dd(end)]%1:n%22:n
     % file1 = dir(forceFile);% file1.name
     % run('C:\Users\mhossein\Documents\OpenSim\4.0\Code\Matlab\c3dExport.m');
     path = dirIn;
-    filename = dirName2.name
+    filename = dirName2.name;
     % cd('C:\Users\mhossein\Documents\OpenSim\4.0\Code\Matlab'); % add this path
     % if filter = -1 then no filtering occurs [filter (y/n) cutOff=15hz order=4]
     % ex: c3dExportLoop(path, filename, [-1 15 4]), filter = 1; cutoff = 10; order = 4;
-    disp('Processing:'); filename
-    try
+    disp('Processing:'); %filename
+    cd('C:\Users\Corrine\Desktop\Intern2019Summer\OpenSim\Matlab\mFiles');
+%     try
         c3dExportLoop(path, filename, [filter cutoff order])
         % EMG..import
-        cd(dirIn);
-     catch 
-         if warning(['Illegal Column label. *32 changed to _32'])
-           errCollect(k).name = dirName2.name;% c3dp(k).name; %Store the files names with error it also finalizes the script
-         errCollect(k).data = i;% c3dp(k).name; %Store the files names with error it also finalizes the script
-           k=k+1;
-         
-         end
+        cd('C:\Users\Corrine\Desktop\Intern2019Summer\OpenSim\Matlab\mFiles');
+%      catch 
+%          if warning(['Illegal Column label. *32 changed to _32'])
+%            errCollect(k).name = dirName2.name;% c3dp(k).name; %Store the files names with error it also finalizes the script
+%          errCollect(k).data = i;% c3dp(k).name; %Store the files names with error it also finalizes the script
+%            k=k+1;
+%          
+%          end
         continue; 
     end
     % run('C:\Users\mhossein\Documents\OpenSim\4.0\Code\Matlab\c3dExportLoop.m');
@@ -114,7 +115,7 @@ for i=1:5%n%%[dd(1):dd(end)]%1:n%22:n
     % !opensim-cmd run-tool SO_HBM_Setupv3.xml
 end
 
-save('errCollect','errCollect')
+% save('errCollect','errCollect')
 
 
-toc
+% toc

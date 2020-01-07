@@ -1,1 +1,29 @@
-test
+%% RoadMap for Stability and gait parameters, OpenSim
+
+
+% Preprocessing 
+% naming of files, cleaning up and events, pertub Ok, etc...check all details
+
+% Analyses
+%                                 FullBody OpenSim
+%                                    |
+%                                    |
+% c3d + generic model OpenSim ---> scaled ---> IK ---> ID ---> SO ---> JRF,
+% c3d ---> trc + mot --->     ---> GRF            ---> RRA        ---> CMC ---> Metabolic Caculation
+%              |                                                           ---> Muscle  Contr
+%              |                                                           ---> ....
+%              |                                                           ---> ....
+            % TRCs ---> gait events, gait stability parameters ---> SL, SF, 
+            %                                                  ---> D/ND
+            %                                                  ---> MoS
+            %                                                  ---> CoM (can come from OpenSim)
+            %                                                  ---> Belt Speed
+            %                                                  ---> Pre/Post Pertub Event                                                
+            %                                                  ---> 
+%  
+% DFLOW ---> BeltSpeed, Pertub timing, match w/TRC ---> Compare w TRCs Belt Speed
+
+%Questions to handle: Nans, Pertub No, Missign Data, how to save data,
+%plots, check ups error gathering at each step, manual work for cleaning
+
+% Postprocessing e.g. Visualize etc

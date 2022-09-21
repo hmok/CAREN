@@ -48,7 +48,7 @@ See this <a href="https://www.youtube.com/watch?v=ZG7wzvQC6eU">Link</a>.</td>
 
 <h2>OpenSim Pipeline</h2> 
 <img src="Pipeline.jpg" alt="OpenSim Pipeline">
-The pipeline for the toolbox involves the initial gathering of the 3D data with CAREN Lab. The C3D data output file will then go through the OpenSim Workflow via Matlab and can take two paths: Scripting (executing original code) or through a GUI (simplified app). The output of both processes will be plots of the results of the desired biomechanical variables. More information regarding the entire process is described in the Appendix.
+<p>The pipeline for the toolbox involves the initial gathering of the 3D data with CAREN Lab. The C3D data output file will then go through the OpenSim Workflow via Matlab and can take two paths: Scripting (executing original code) or through a GUI (simplified app). The output of both processes will be plots of the results of the desired biomechanical variables. More information regarding the entire process is described in the Appendix. </p>
 
 <b>A quick setup to use CAREN2OpenSim toolkit in Matlab:</b> 
 
